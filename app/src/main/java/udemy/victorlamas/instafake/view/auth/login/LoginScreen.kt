@@ -1,7 +1,5 @@
 package udemy.victorlamas.instafake.view.auth.login
 
-import android.R.attr.padding
-import android.R.attr.top
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -21,26 +19,25 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import udemy.victorlamas.instafake.R
 
 @Preview
 @Composable
-fun LoginScreen() {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
+//    var email by remember { mutableStateOf("") }
+//    var password by remember { mutableStateOf("") }
+
+    val uiState by loginViewModel.uiState.collectAsStateWithLifecycle()
 
     Scaffold { padding ->
         Column(
@@ -68,24 +65,25 @@ fun LoginScreen() {
             // Body
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = email,
+                value = uiState.email,
                 label = { Text("Usuario, correo electrónico o móvil") },
-                onValueChange = { email = it },
+                onValueChange = { loginViewModel.onEmailChanged(it) },
                 shape = RoundedCornerShape(30)
             )
             Spacer(Modifier.height(12.dp))
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = password,
+                value = uiState.password,
                 label = { Text("Contraseña") },
-                onValueChange = { password = it },
+                onValueChange = { loginViewModel.onPasswordChanged(it) },
                 shape = RoundedCornerShape(30)
             )
             Spacer(Modifier.height(12.dp))
             Button(
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Blue),
-                onClick = {}
+                onClick = {},
+                enabled = uiState.isLoginEnabled
             ) {
                 Text(
                     text = "Iniciar sesión",
