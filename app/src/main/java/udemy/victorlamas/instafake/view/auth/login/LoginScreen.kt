@@ -12,24 +12,25 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import udemy.victorlamas.instafake.R
+import udemy.victorlamas.instafake.view.core.components.InstaButtonPrimary
+import udemy.victorlamas.instafake.view.core.components.InstaTextBody
 
 @Composable
 fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
@@ -48,11 +49,11 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Header
-            Text(
+            InstaTextBody(
                 modifier = Modifier.padding(top = 22.dp),
-                text = "Español (España)",
-                color = MaterialTheme.colorScheme.onBackground,
-                //style = MaterialTheme.typography.bodyLarge
+                text = stringResource(R.string.login_screen_header_text_spain),
+//                color = MaterialTheme.colorScheme.onBackground,
+//                style = MaterialTheme.typography.bodyLarge
             )
             Spacer(Modifier.weight(1f))
             Image(
@@ -67,9 +68,9 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
                 modifier = Modifier.fillMaxWidth(),
                 value = uiState.email,
                 label = {
-                    Text(
-                        "Usuario, correo electrónico o móvil",
-                        color = MaterialTheme.colorScheme.onBackground
+                    InstaTextBody(
+                        text = stringResource(R.string.login_screen_textfield_email),
+//                        color = MaterialTheme.colorScheme.onBackground
                     )
                 },
                 onValueChange = { loginViewModel.onEmailChanged(it) },
@@ -80,33 +81,24 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
                 modifier = Modifier.fillMaxWidth(),
                 value = uiState.password,
                 label = {
-                    Text(
-                        "Contraseña",
-                        color = MaterialTheme.colorScheme.onBackground
+                    InstaTextBody(
+                        text = stringResource(R.string.login_screen_textfield_password),
+//                        color = MaterialTheme.colorScheme.onBackground
                     )
                 },
                 onValueChange = { loginViewModel.onPasswordChanged(it) },
                 shape = RoundedCornerShape(30)
             )
             Spacer(Modifier.height(12.dp))
-            Button(
+            InstaButtonPrimary(
                 modifier = Modifier.fillMaxWidth(),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.primary
-                ),
                 onClick = {},
                 enabled = uiState.isLoginEnabled,
-                shape = MaterialTheme.shapes.extraLarge
-            ) {
-                Text(
-                    modifier = Modifier.padding(vertical = 4.dp),
-                    text = "Iniciar sesión",
-                    color = MaterialTheme.colorScheme.onPrimary
-                )
-            }
+                text = stringResource(R.string.login_screen_button_login)
+            )
             TextButton(onClick = {}) {
-                Text(
-                    text = "¿Has olvidado la contraseña?",
+                InstaTextBody(
+                    text = stringResource(R.string.login_screen_text_forgot_password),
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
@@ -124,7 +116,7 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
                     contentColor = MaterialTheme.colorScheme.primary
                 ),
             ) {
-                Text(text = "Crear cuenta nueva")
+                InstaTextBody(text = stringResource(R.string.login_screen_button_register))
             }
             Icon(
                 modifier = Modifier
@@ -132,7 +124,7 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
                     .padding(vertical = 22.dp),
                 painter = painterResource(R.drawable.ic_meta),
                 contentDescription = "Meta logo",
-                tint = MaterialTheme.colorScheme.onBackground
+//                tint = MaterialTheme.colorScheme.onBackground
             )
         }
     }
