@@ -26,13 +26,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import udemy.victorlamas.instafake.R
 
-@Preview
 @Composable
 fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
 //    var email by remember { mutableStateOf("") }
@@ -97,7 +95,8 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
                     containerColor = MaterialTheme.colorScheme.primary
                 ),
                 onClick = {},
-                enabled = uiState.isLoginEnabled
+                enabled = uiState.isLoginEnabled,
+                shape = MaterialTheme.shapes.extraLarge
             ) {
                 Text(
                     modifier = Modifier.padding(vertical = 4.dp),
