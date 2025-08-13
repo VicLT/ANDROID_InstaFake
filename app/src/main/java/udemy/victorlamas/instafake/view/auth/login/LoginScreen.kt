@@ -30,7 +30,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import udemy.victorlamas.instafake.R
 import udemy.victorlamas.instafake.view.core.components.InstaButtonPrimary
-import udemy.victorlamas.instafake.view.core.components.InstaTextBody
+import udemy.victorlamas.instafake.view.core.components.InstaText
 
 @Composable
 fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
@@ -49,7 +49,7 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Header
-            InstaTextBody(
+            InstaText(
                 modifier = Modifier.padding(top = 22.dp),
                 text = stringResource(R.string.login_screen_header_text_spain),
 //                color = MaterialTheme.colorScheme.onBackground,
@@ -68,7 +68,7 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
                 modifier = Modifier.fillMaxWidth(),
                 value = uiState.email,
                 label = {
-                    InstaTextBody(
+                    InstaText(
                         text = stringResource(R.string.login_screen_textfield_email),
 //                        color = MaterialTheme.colorScheme.onBackground
                     )
@@ -81,7 +81,7 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
                 modifier = Modifier.fillMaxWidth(),
                 value = uiState.password,
                 label = {
-                    InstaTextBody(
+                    InstaText(
                         text = stringResource(R.string.login_screen_textfield_password),
 //                        color = MaterialTheme.colorScheme.onBackground
                     )
@@ -97,7 +97,7 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
                 text = stringResource(R.string.login_screen_button_login)
             )
             TextButton(onClick = {}) {
-                InstaTextBody(
+                InstaText(
                     text = stringResource(R.string.login_screen_text_forgot_password),
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -116,7 +116,7 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
                     contentColor = MaterialTheme.colorScheme.primary
                 ),
             ) {
-                InstaTextBody(text = stringResource(R.string.login_screen_button_register))
+                InstaText(text = stringResource(R.string.login_screen_button_register))
             }
             Icon(
                 modifier = Modifier

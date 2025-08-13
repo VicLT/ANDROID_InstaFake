@@ -28,7 +28,7 @@ fun InstaButtonPrimary(
         enabled = enabled,
         shape = shape
     ) {
-        InstaTextBody(
+        InstaText(
             modifier = Modifier.padding(vertical = 4.dp),
             text = text,
             color = MaterialTheme.colorScheme.onPrimary
