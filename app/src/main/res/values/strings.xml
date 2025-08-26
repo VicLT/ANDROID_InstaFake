@@ -20,4 +20,5 @@
     <string name="register_screen_button_next">Siguiente</string>
     <string name="register_screen_button_register">Registrarte con tu correo electrónico</string>
     <string name="register_screen_button_register_alternative">Registrarte con tu número de móvil</string>
+    <string name="register_screen_text_find_my_account">Buscar mi cuenta</string>
 </resources>

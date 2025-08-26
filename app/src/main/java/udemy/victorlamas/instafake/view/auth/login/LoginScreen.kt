@@ -1,6 +1,5 @@
 package udemy.victorlamas.instafake.view.auth.login
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -12,10 +11,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TextButton
@@ -30,6 +27,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import udemy.victorlamas.instafake.R
 import udemy.victorlamas.instafake.view.core.components.InstaButtonPrimary
+import udemy.victorlamas.instafake.view.core.components.InstaButtonSecondary
 import udemy.victorlamas.instafake.view.core.components.InstaText
 
 @Composable
@@ -105,19 +103,11 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
             Spacer(Modifier.weight(1.5f))
 
             // Footer
-            OutlinedButton(
+            InstaButtonSecondary(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {},
-                border = BorderStroke(
-                    width = 1.dp,
-                    color = MaterialTheme.colorScheme.primary
-                ),
-                colors = ButtonDefaults.outlinedButtonColors(
-                    contentColor = MaterialTheme.colorScheme.primary
-                ),
-            ) {
-                InstaText(text = stringResource(R.string.login_screen_button_register))
-            }
+                text = stringResource(R.string.login_screen_button_register)
+            )
             Icon(
                 modifier = Modifier
                     .width(60.dp)

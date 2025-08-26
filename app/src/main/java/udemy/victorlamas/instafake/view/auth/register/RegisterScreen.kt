@@ -11,11 +11,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -29,6 +27,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import udemy.victorlamas.instafake.R
 import udemy.victorlamas.instafake.view.core.components.InstaButtonPrimary
+import udemy.victorlamas.instafake.view.core.components.InstaButtonSecondary
 import udemy.victorlamas.instafake.view.core.components.InstaText
 import udemy.victorlamas.instafake.view.core.components.InstaTextField
 
@@ -75,8 +74,8 @@ fun RegisterScreen(registerViewModel: RegisterViewModel = viewModel()) {
             )
             Spacer(Modifier.height(16.dp))
             InstaTextField(
-                value = uiState.number,
                 modifier = Modifier.fillMaxWidth(),
+                value = uiState.number,
                 shape = RoundedCornerShape(30),
                 label = stringResource(R.string.register_screen_textfield_number),
                 onValueChange = { registerViewModel.onNumberChanged(it) }
@@ -85,29 +84,27 @@ fun RegisterScreen(registerViewModel: RegisterViewModel = viewModel()) {
             InstaText(
                 text = stringResource(R.string.register_screen_text_warning)
             )
-            Spacer(Modifier.height(16.dp))
+            Spacer(Modifier.height(12.dp))
             InstaButtonPrimary(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {},
                 enabled = uiState.isRegisterEnabled,
                 text = stringResource(R.string.register_screen_button_next)
             )
-            Spacer(Modifier.height(16.dp))
-            OutlinedButton(
+            Spacer(Modifier.height(4.dp))
+            InstaButtonSecondary(
                 modifier = Modifier.fillMaxWidth(),
-                onClick = {
-
-                },
-                border = BorderStroke(
-                    width = 1.dp,
-                    color = MaterialTheme.colorScheme.primary
-                ),
-                colors = ButtonDefaults.outlinedButtonColors(
-                    contentColor = MaterialTheme.colorScheme.primary
-                ),
-            ) {
-                InstaText(text = stringResource(R.string.register_screen_button_register))
-            }
+                onClick = {},
+                text = stringResource(R.string.register_screen_button_register),
+                textColor = MaterialTheme.colorScheme.onPrimary,
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.onBackground)
+            )
+            Spacer(Modifier.weight(1f))
+            InstaText(
+                modifier = Modifier.padding(4.dp),
+                text = stringResource(R.string.register_screen_text_find_my_account),
+                color = MaterialTheme.colorScheme.primary
+            )
         }
     }
 }
