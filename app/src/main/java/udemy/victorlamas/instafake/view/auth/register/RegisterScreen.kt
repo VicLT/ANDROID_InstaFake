@@ -92,15 +92,16 @@ fun RegisterScreen(
         ) {
             AnimatedContent(title) { animatedTitle ->
                 InstaText(
+                    modifier = Modifier.fillMaxWidth(),
                     text = animatedTitle,
                     style = MaterialTheme.typography.headlineLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
-            Spacer(Modifier.height(4.dp))
+            Spacer(Modifier.height(8.dp))
             InstaText(
                 text = subtitle,
-                style = MaterialTheme.typography.titleSmall
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
             Spacer(Modifier.height(16.dp))
             InstaTextField(

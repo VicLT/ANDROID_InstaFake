@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.Shape
 fun InstaTextField(
     value: String,
     modifier: Modifier = Modifier,
-    shape: Shape = MaterialTheme.shapes.large,
+    shape: Shape = MaterialTheme.shapes.medium,
     label: String = "",
     onValueChange: (String) -> Unit,
 ) {

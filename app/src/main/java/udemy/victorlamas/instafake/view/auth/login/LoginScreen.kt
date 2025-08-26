@@ -10,10 +10,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -29,6 +27,7 @@ import udemy.victorlamas.instafake.R
 import udemy.victorlamas.instafake.view.core.components.InstaButtonPrimary
 import udemy.victorlamas.instafake.view.core.components.InstaButtonSecondary
 import udemy.victorlamas.instafake.view.core.components.InstaText
+import udemy.victorlamas.instafake.view.core.components.InstaTextField
 
 @Composable
 fun LoginScreen(
@@ -61,28 +60,18 @@ fun LoginScreen(
             Spacer(Modifier.weight(1f))
 
             // Body
-            OutlinedTextField(
+            InstaTextField(
                 modifier = Modifier.fillMaxWidth(),
                 value = uiState.email,
-                label = {
-                    InstaText(
-                        text = stringResource(R.string.login_screen_textfield_email),
-                    )
-                },
+                label = stringResource(R.string.login_screen_textfield_email),
                 onValueChange = { loginViewModel.onEmailChanged(it) },
-                shape = RoundedCornerShape(30)
             )
             Spacer(Modifier.height(12.dp))
-            OutlinedTextField(
+            InstaTextField(
                 modifier = Modifier.fillMaxWidth(),
                 value = uiState.password,
-                label = {
-                    InstaText(
-                        text = stringResource(R.string.login_screen_textfield_password),
-                    )
-                },
+                label = stringResource(R.string.login_screen_textfield_password),
                 onValueChange = { loginViewModel.onPasswordChanged(it) },
-                shape = RoundedCornerShape(30)
             )
             Spacer(Modifier.height(12.dp))
             InstaButtonPrimary(
