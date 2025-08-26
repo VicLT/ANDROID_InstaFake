@@ -31,9 +31,10 @@ import udemy.victorlamas.instafake.view.core.components.InstaButtonSecondary
 import udemy.victorlamas.instafake.view.core.components.InstaText
 
 @Composable
-fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
-//    var email by remember { mutableStateOf("") }
-//    var password by remember { mutableStateOf("") }
+fun LoginScreen(
+    loginViewModel: LoginViewModel = viewModel(),
+    navigateToRegister: () -> Unit
+) {
 
     val uiState by loginViewModel.uiState.collectAsStateWithLifecycle()
 
@@ -50,8 +51,6 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
             InstaText(
                 modifier = Modifier.padding(top = 22.dp),
                 text = stringResource(R.string.login_screen_header_text_spain),
-//                color = MaterialTheme.colorScheme.onBackground,
-//                style = MaterialTheme.typography.bodyLarge
             )
             Spacer(Modifier.weight(1f))
             Image(
@@ -68,7 +67,6 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
                 label = {
                     InstaText(
                         text = stringResource(R.string.login_screen_textfield_email),
-//                        color = MaterialTheme.colorScheme.onBackground
                     )
                 },
                 onValueChange = { loginViewModel.onEmailChanged(it) },
@@ -81,7 +79,6 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
                 label = {
                     InstaText(
                         text = stringResource(R.string.login_screen_textfield_password),
-//                        color = MaterialTheme.colorScheme.onBackground
                     )
                 },
                 onValueChange = { loginViewModel.onPasswordChanged(it) },
@@ -105,7 +102,7 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
             // Footer
             InstaButtonSecondary(
                 modifier = Modifier.fillMaxWidth(),
-                onClick = {},
+                onClick = { navigateToRegister() },
                 text = stringResource(R.string.login_screen_button_register)
             )
             Icon(
@@ -114,7 +111,6 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
                     .padding(vertical = 22.dp),
                 painter = painterResource(R.drawable.ic_meta),
                 contentDescription = "Meta logo",
-//                tint = MaterialTheme.colorScheme.onBackground
             )
         }
     }
