@@ -1,5 +1,6 @@
 package udemy.victorlamas.instafake.view.auth.register
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -37,6 +38,28 @@ fun RegisterScreen(registerViewModel: RegisterViewModel = viewModel()) {
 
     val uiState by registerViewModel.uiState.collectAsStateWithLifecycle()
 
+    val title: String
+    val subtitle: String
+    val label: String
+    val changeModeTitle: String
+
+    when (uiState.isPhoneMode) {
+        true -> {
+            title = stringResource(R.string.register_screen_title)
+            subtitle = stringResource(R.string.register_screen_subtitle)
+            label = stringResource(R.string.register_screen_textfield_number)
+            changeModeTitle = stringResource(R.string.register_screen_button_register)
+        }
+
+        false -> {
+            title = stringResource(R.string.register_screen_title_alternative)
+            subtitle = stringResource(R.string.register_screen_subtitle_alternative)
+            label = stringResource(R.string.register_screen_textfield_number_alternative)
+            changeModeTitle =
+                stringResource(R.string.register_screen_button_register_alternative)
+        }
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -62,23 +85,25 @@ fun RegisterScreen(registerViewModel: RegisterViewModel = viewModel()) {
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            InstaText(
-                text = stringResource(R.string.register_screen_title),
-                style = MaterialTheme.typography.headlineLarge,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
+            AnimatedContent(title) { animatedTitle ->
+                InstaText(
+                    text = animatedTitle,
+                    style = MaterialTheme.typography.headlineLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
             Spacer(Modifier.height(4.dp))
             InstaText(
-                text = stringResource(R.string.register_screen_subtitle),
+                text = subtitle,
                 style = MaterialTheme.typography.titleSmall
             )
             Spacer(Modifier.height(16.dp))
             InstaTextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = uiState.number,
+                value = uiState.value,
                 shape = RoundedCornerShape(30),
-                label = stringResource(R.string.register_screen_textfield_number),
-                onValueChange = { registerViewModel.onNumberChanged(it) }
+                label = label,
+                onValueChange = { registerViewModel.onRegisterChanged(it) }
             )
             Spacer(Modifier.height(16.dp))
             InstaText(
@@ -94,8 +119,8 @@ fun RegisterScreen(registerViewModel: RegisterViewModel = viewModel()) {
             Spacer(Modifier.height(4.dp))
             InstaButtonSecondary(
                 modifier = Modifier.fillMaxWidth(),
-                onClick = {},
-                text = stringResource(R.string.register_screen_button_register),
+                onClick = { registerViewModel.onChangeMode() },
+                text = changeModeTitle,
                 textColor = MaterialTheme.colorScheme.onPrimary,
                 border = BorderStroke(1.dp, MaterialTheme.colorScheme.onBackground)
             )

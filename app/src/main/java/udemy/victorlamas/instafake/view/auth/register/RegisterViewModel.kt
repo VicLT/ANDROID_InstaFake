@@ -10,27 +10,26 @@ class RegisterViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(RegisterUiState())
     val uiState: StateFlow<RegisterUiState> = _uiState
 
-    fun onNumberChanged(newNumber: String) {
-        _uiState.update { state ->
-            state.copy(
-                number = newNumber
-            )
-        }
-        verifyRegister()
-    }
-
-    private fun verifyRegister() {
-        val enabledRegister = isNumberValid(uiState.value.number)
+    fun onChangeMode() {
         _uiState.update {
-            it.copy(isRegisterEnabled = enabledRegister)
+            it.copy(isPhoneMode = !it.isPhoneMode, value = "")
         }
     }
 
-    private fun isNumberValid(number: String): Boolean =
-        Patterns.PHONE.matcher(number).matches()
+    fun onRegisterChanged(value: String) {
+        _uiState.update { state ->
+            val isEnabled = if (state.isPhoneMode) {
+                value.length >= 9 && value.all { it.isDigit() }
+            } else {
+                Patterns.EMAIL_ADDRESS.matcher(value).matches()
+            }
+            state.copy(isRegisterEnabled = isEnabled, value = value)
+        }
+    }
 }
 
 data class RegisterUiState(
-    val number: String = "",
+    val value: String = "",
+    val isPhoneMode: Boolean = true,
     val isRegisterEnabled: Boolean = false
 )
