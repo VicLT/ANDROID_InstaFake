@@ -2,21 +2,21 @@ package udemy.victorlamas.instafake.view.auth.login
 
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import udemy.victorlamas.instafake.domain.usecases.LoginUseCase
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel(val login: LoginUseCase) : ViewModel() {
     private val _uiState = MutableStateFlow(LoginUiState())
     val uiState: StateFlow<LoginUiState> = _uiState
 
     fun onEmailChanged(newEmail: String) {
         _uiState.update { state ->
             state.copy(
-//                email = newEmail,
-//                isLoginEnabled = isEmailValid(state.email) && isPasswordValid(
-//                    state.password
-//                )
                 email = newEmail
             )
         }
@@ -27,14 +27,16 @@ class LoginViewModel : ViewModel() {
     fun onPasswordChanged(newPass: String) {
         _uiState.update { state ->
             state.copy(
-//                password = newPass,
-//                isLoginEnabled = isEmailValid(state.email) && isPasswordValid(
-//                    state.password
-//                )
                 password = newPass
             )
         }
         verifyLogin()
+    }
+
+    fun onClickSelected() {
+        viewModelScope.launch(Dispatchers.IO) {
+            login(_uiState.value.email, _uiState.value.password)
+        }
     }
 
     private fun verifyLogin() {
