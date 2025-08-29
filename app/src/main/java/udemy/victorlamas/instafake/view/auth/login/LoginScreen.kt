@@ -21,8 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import udemy.victorlamas.instafake.R
 import udemy.victorlamas.instafake.view.core.components.InstaButtonPrimary
 import udemy.victorlamas.instafake.view.core.components.InstaButtonSecondary
@@ -31,7 +31,7 @@ import udemy.victorlamas.instafake.view.core.components.InstaTextField
 
 @Composable
 fun LoginScreen(
-    loginViewModel: LoginViewModel = viewModel(),
+    loginViewModel: LoginViewModel = hiltViewModel(),
     navigateToRegister: () -> Unit
 ) {
 
